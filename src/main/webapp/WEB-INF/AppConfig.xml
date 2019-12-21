@@ -10,19 +10,19 @@
   http://www.springframework.org/schema/tx
   http://www.springframework.org/schema/tx/spring-tx.xsd"> 
   <!-- Loading annotated beans -->
-<!--   <context:component-scan base-package="com.lti.controller"/>
-  <context:component-scan base-package="com.lti.dao"/>
-  <context:component-scan base-package="com.lti.service"/> -->
+  <context:component-scan base-package="com.lti.controller"/>
+  <context:component-scan base-package="com.lti.repository"/>
+  <context:component-scan base-package="com.lti.service"/>
   
   <!-- DataSource Configuration-->
   <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
   	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-  	<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-  	<property name="username" value="hr"/>
-  	<property name="password" value="hr"/>
+  	<property name="url" value="jdbc:oracle:thin:@192.168.12.204:1521:XE"/>
+  	<property name="username" value="toofani"/>
+  	<property name="password" value="aashiq"/>
   </bean>   
   
-  <!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.live.com"/>
         <property name="port" value="587" />
         <property name="username" value="ruchikasharma2000@outlook.com"/>
@@ -42,10 +42,15 @@
     
     <bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
         <property name="from" value="ruchikasharma2000@outlook.com"></property>
-    </bean> -->
+    </bean>
   
-  <bean id="myEmf"
-  class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+  <!-- Settings required when using JPA along with Spring -->
+  <!-- 
+  This bean entry will help us get the EntityManagerFactory and EntityManager object
+  for us.Also there is no need for a seperate META-INF/persistence.xml, all the
+  ORM specific settings can be done within the bean configuration
+   -->
+  <bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="ds" /><!-- DataSource/Database setting -->
     <property name="packagesToScan" value="com.lti.model" /><!-- Location of @Entity class -->
     <property name="jpaVendorAdapter">
@@ -54,6 +59,7 @@
     <property name="jpaProperties">
         <props>
             <prop key="hibernate.show_sql">true</prop>
+            
         </props>
     </property>
 </bean>
@@ -64,4 +70,9 @@
     </bean>
 
 <tx:annotation-driven />
+
+<!-- Enabling support for File Upload in Spring MVC -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSizePerFile" value="52428800"/>
+    </bean>
 </beans>
