@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,15 +26,15 @@ public class FlightSchedule {
 	private LocalDate scheduleDate;
 	
 	@Column(name="Arrival_Time")
-	private Time arrivalTime;
+	private String arrivalTime;
 	
 	@Column(name="Departure_Time")
-	private Time departureTime;
+	private String departureTime;
 	
-	private Time duration;
+	private String duration;
 	
 	@ManyToOne
-	@JoinColumn(name="flightId")
+	@JoinColumn(name="Flight_Id")
 	FlightsDetails flightsDetails;
 
 	public int getFlightScheduleId() {
@@ -60,27 +61,27 @@ public class FlightSchedule {
 		this.scheduleDate = scheduleDate;
 	}
 
-	public Time getArrivalTime() {
+	public String getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(Time arrivalTime) {
+	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public Time getDepartureTime() {
+	public String getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(Time departureTime) {
+	public void setDepartureTime(String departureTime) {
 		this.departureTime = departureTime;
 	}
 
-	public Time getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Time duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
