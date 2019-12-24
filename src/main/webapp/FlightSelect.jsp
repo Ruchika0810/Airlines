@@ -14,47 +14,70 @@ text-align: center;
 	top: 50%;
 	left: 50%;
 	margin: auto;
+	padding-top: 20px;
 }
 
 .tab td
 {
-    padding:5px 15px 10px ;
+    padding:25px 25px 10px ;
+}
+.top{
+font-size: 25px;
+color:white; 
+text-align:justify;
+}
+
+.top nav{
+display: block;
+background-color:teal;
+padding: 15px;
+}
+
+.but{
+	height: 35px;
+	border-radius: 5px;
+	}
+
+.but>input{
+
+height: 35px;
+border-radius: 5px;
+border: 1px solid grey;
+background:powderblue;
 }
 </style>
 </head>
 <body>
+<div class="top">
+	<nav>
+		<span>${ source } -> ${ destination }</span>
+		<span style="float: right; ">${ passengers } Passengers</span>
+	</nav>
+	</div>
 	<div class="main">
-		<h1 style="color: red">FLIGHTS FOR THE SELECTED OPTIONS ARE</h1>
-		<table border="1" style="color: olive; " class="tab">
+	
+		<table  style="color: olive; " class="tab">
 			<tr>
+<th>Time</th>
 <th>Flight No</th>
-<th>Source</th>
-<th>Destination</th>
+<th>Duration</th>		
 <th>Economy Price</th>
 <th>Business Price</th>
-<th>Seat Availability</th>
-<th>Date</th>
-<th>Departure Time</th>
-<th>Arrival Time</th>
-<th>Duration</th>		
 				<c:forEach items="${ flightList }" var="flight">
 					<tr>
+						<td> ${ flight.departureTime }-
+						 ${ flight.arrivalTime }</td>
 						<td>${ flight.flightsDetails.flightId }</td>
-						<td>${ flight.flightsDetails.source }</td>
-						<td>${ flight.flightsDetails.destination }</td>
-						<td>${ flight.flightsDetails.economyPrice }</td>
-						<td>${ flight.flightsDetails.businessPrice }</td>
-						<td>${ flight.flightsDetails.seatAvailablity }</td>
-						<td>${ flight.scheduleDate } </td>
-						<td>${ flight.arrivalTime } </td>
-						<td>${ flight.departureTime } </td>
 						<td>${ flight.duration } </td>
-						<%-- <td><input  value="${ flight.flightSchedules.getArrivalTime().toString() }" readonly></td> --%>
-						<td><input type="button" value="Book" /></td>
+						<td><INPUT TYPE="radio" name="eco"><br>${ flight.flightsDetails.economyPrice }</td>
+						<td><INPUT TYPE="radio" name="eco"><br>${ flight.flightsDetails.businessPrice }</td>					
 					</tr>
 				</c:forEach>
-
 		</table>
+			<div class="but">
+	<input type="button" value="Book"> 
 	</div>
+	</div>
+
 </body>
 </html>

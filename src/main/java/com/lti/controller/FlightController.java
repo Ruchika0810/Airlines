@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.lti.model.FlightSchedule;
-import com.lti.model.FlightsDetails;
+
 import com.lti.model.Registeration;
 import com.lti.service.FlightDetailsService;
 import com.lti.service.LoginService;
 
 @Controller
-@SessionAttributes("loggedInPassenger")
+@SessionAttributes({"loggedInPassenger","passengers"})
 public class FlightController {
 
 		@Autowired
@@ -45,10 +45,22 @@ public class FlightController {
 		}
 		
 		@RequestMapping(path="/flight.lti", method = RequestMethod.POST)
-		public String fetchFlight(ModelMap model,@RequestParam("source")String source, @RequestParam("destination")String destination, @RequestParam("from")LocalDate date){
-			List<FlightSchedule> details =flightDetailsService.fetchFlight(source, destination, date);
-			model.put("flightList", details);
-			return "FlightSelect.jsp";
+		public String fetchFlight(ModelMap model,@RequestParam("source")String source, @RequestParam("destination")String destination, 
+				@RequestParam("from")LocalDate date,@RequestParam("passengers") int passengers){
+			List<FlightSchedule> details ;
+			try{
+				details=flightDetailsService.fetchFlight(source, destination, date,passengers);
+				model.put("flightList", details);
+				model.put("source", details.get(0).getFlightsDetails().getSource());
+				model.put("destination", details.get(0).getFlightsDetails().getDestination());
+				model.put("passengers", passengers);
+				return "FlightSelect.jsp";
+			}
+			catch(Exception e) {
+				model.put("fail", "No Flights Found");
+				return "Failure.jsp";
+			}
+			
 		}
 		
 		@Autowired
