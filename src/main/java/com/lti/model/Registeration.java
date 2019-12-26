@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -41,11 +43,10 @@ public class Registeration {
 	
 	@Column(name="DATEOFBIRTH")
 	private LocalDate dateOfBirth;
-	
+		
+
 	@Column(name="PHONE_NUMBER")
 	private String mobileNumber;
-
-	
 
 	/*
 	public String getConfPassword() {

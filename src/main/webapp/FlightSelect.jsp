@@ -46,8 +46,10 @@ border: 1px solid grey;
 background:powderblue;
 }
 </style>
+
 </head>
 <body>
+	<form action="flightSelect.lti"  method="post">
 <div class="top">
 	<nav>
 		<span>${ source } -> ${ destination }</span>
@@ -62,22 +64,24 @@ background:powderblue;
 <th>Flight No</th>
 <th>Duration</th>		
 <th>Economy Price</th>
-<th>Business Price</th>
+<th>Business Price</th></tr>
 				<c:forEach items="${ flightList }" var="flight">
 					<tr>
+					
 						<td> ${ flight.departureTime }-
 						 ${ flight.arrivalTime }</td>
 						<td>${ flight.flightsDetails.flightId }</td>
 						<td>${ flight.duration } </td>
-						<td><INPUT TYPE="radio" name="eco"><br>${ flight.flightsDetails.economyPrice }</td>
-						<td><INPUT TYPE="radio" name="eco"><br>${ flight.flightsDetails.businessPrice }</td>					
+						<td><INPUT TYPE="radio" name="flightclass" value="${ flight.flightsDetails.economyPrice }"><br>${ flight.flightsDetails.economyPrice }</td>
+						<td><INPUT TYPE="radio" name="flightclass" value="${ flight.flightsDetails.businessPrice }"><br>${ flight.flightsDetails.businessPrice }</td>					
 					</tr>
 				</c:forEach>
 		</table>
 			<div class="but">
-	<input type="button" value="Book"> 
-	</div>
-	</div>
+<input type="submit" value="Book"/>
 
+	</div>
+	</div>
+</form>
 </body>
 </html>

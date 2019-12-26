@@ -1,5 +1,7 @@
 package com.lti.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -16,10 +18,10 @@ public class PassengerRepository {
 	private EntityManager entityManager;
 	
 	@Transactional
-	public void addPassengerDetails(Passenger passenger) {
+	public void addPassengerDetails(List<Passenger> passenger) {
 		
-		entityManager.merge(passenger);
-		
+		for(Passenger p : passenger)
+			entityManager.merge(p);
 	}
 
 }

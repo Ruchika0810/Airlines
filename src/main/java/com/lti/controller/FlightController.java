@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,15 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.request.SessionScope;
 
+import com.lti.dto.PassengerDetailsDto;
 import com.lti.model.FlightSchedule;
-
+import com.lti.model.FlightsDetails;
+import com.lti.model.Passenger;
 import com.lti.model.Registeration;
 import com.lti.service.FlightDetailsService;
 import com.lti.service.LoginService;
+import com.lti.service.PassengerService;
+import com.lti.service.RegisterationService;
 
 @Controller
-@SessionAttributes({"loggedInPassenger","passengers"})
+@SessionAttributes({"passengers"})
 public class FlightController {
 
 		@Autowired
@@ -50,7 +57,7 @@ public class FlightController {
 			List<FlightSchedule> details ;
 			try{
 				details=flightDetailsService.fetchFlight(source, destination, date,passengers);
-				model.put("flightList", details);
+				model.put("flightList", details);        
 				model.put("source", details.get(0).getFlightsDetails().getSource());
 				model.put("destination", details.get(0).getFlightsDetails().getDestination());
 				model.put("passengers", passengers);
@@ -67,16 +74,47 @@ public class FlightController {
 		private LoginService loginService;
 		
 		@RequestMapping(path="/login.lti",method=RequestMethod.POST)
-		public String loginFlight(@RequestParam("email") String email,@RequestParam("password") String password,ModelMap model) {
+		public String loginFlight(@RequestParam("email") String email,@RequestParam("password") String password) {//,ModelMap model) {
 		
 			try {
 				Registeration login = loginService.login(email, password);
-				model.put("loggedInPassenger",login);
-				return "success.jsp";
+				//model.put("loggedInPassenger",login);
+				return "FlightSearch.jsp";
 			}
 			catch(Exception e) {
-				model.put("fail", "Login Again");
-				return "Login.jsp";
+				
+				System.out.println("error aaya "+e.getMessage());
+				return "fail.jsp";
 			}
+		}
+		
+		@Autowired
+		private RegisterationService registerationService;
+		
+		@RequestMapping(path = "/addDetails.lti", method = RequestMethod.POST)
+		public String addNewDetails(Registeration registeration) {//,@RequestParam("dateOfBirth") String dob) {
+			
+				
+			registerationService.addUsers(registeration);
+			
+			return "Login.jsp";
+		}
+		
+		@Autowired
+		private PassengerService passengerService;
+		
+		@RequestMapping(path="/addPassenger.lti", method = RequestMethod.POST)
+		public String addPassengerDetails(PassengerDetailsDto passengerDetailsDto,ModelMap model) {
+			List<Passenger> passengers = passengerDetailsDto.getPassengers();
+			
+			  model.put("booking", passengers);
+			passengerService.passengerDetails(passengers);
+			return "Booking.jsp";
+		}
+		
+		@RequestMapping(path="/flightSelect.lti",method = RequestMethod.POST)
+		public String flightSelect(@RequestParam("flightclass") double price,HttpSession session) {
+			session.setAttribute("classPrice", price);
+			return "passenger.jsp";
 		}
 }		

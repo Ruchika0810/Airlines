@@ -105,31 +105,38 @@ input[type="radio"]:checked {
 	height: 35px;
 	border-radius: 5px;
 	border: 1px solid grey;
-	background: #9999ff;
+	background:powderblue;
 	border-color: #a88734 #9c7e31 #846a29;
 	margin-top: 10px;
 	margin-left: 90p30
 	}
-.log{
-float: right; 
-margin-right: 20px
-	}
-.log>input{
-	height: 30px;
-	border-radius: 5px;
-	background: #9999ff;
 	
-	}
+.top{
+font-size: 30px;
+color:white; 
+text-align:justify;
+}
+
+.top nav{
+display: block;
+background-color:teal;
+padding: 15px;
+}
+.log>input{
+	height: 35px;
+	border-radius: 5px;
+	background:powderblue;
+}
 </style>
 </head>
-<body bgcolor="#cce6ff">
+<body bgcolor="#e6e2d3">
 <form action="flight.lti" method="post">
-	<label style="font-family: verdana; font-style: oblique;font-size: 30px; margin-left: 50px">
-	<font color="grey">AIRLINE RESERVATION</font>
-</label>
-<label class="log" >
-<input type="submit" name="submit" value="Login/Signup">
-</label>
+<div class="top">
+<nav>
+	<span>AIRLINE RESERVATION</span>
+	<span style="float: right; " class = "log"><input type="submit" name="submit" value="Login/Signup"></span>
+</nav>
+</div>
 <div class="box">
 <h2 style="margin-bottom: 0.1px"> Book A Flight</h2> <br>
 <div class="flex">

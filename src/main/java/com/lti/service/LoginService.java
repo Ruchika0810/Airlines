@@ -12,13 +12,13 @@ import com.lti.model.Registeration;
 public class LoginService {
 
 	@Autowired
-	private LoginRepository loginDao;
+	private LoginRepository loginRepository;
 	
 	public Registeration login(String email, String password) 
 	{
 		
-		Registeration log = loginDao.fetch(email, password);
-			return log;	
+		Registeration log = loginRepository.fetch(email, password);
+		return log;	
 		
 		
 	}
