@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,7 @@ import com.lti.service.PassengerService;
 import com.lti.service.RegisterationService;
 
 @Controller
-@SessionAttributes({"passengers"})
+@SessionAttributes({"passengers","classPrice"})
 public class FlightController {
 
 		@Autowired
@@ -106,15 +107,19 @@ public class FlightController {
 		@RequestMapping(path="/addPassenger.lti", method = RequestMethod.POST)
 		public String addPassengerDetails(PassengerDetailsDto passengerDetailsDto,ModelMap model) {
 			List<Passenger> passengers = passengerDetailsDto.getPassengers();
-			
 			  model.put("booking", passengers);
 			passengerService.passengerDetails(passengers);
+			Integer pass=(Integer)model.get("passengers");
+			Double price=(Double)model.get("classPrice");
+			Double total= pass*price;
+			model.put("tot", total);
 			return "Booking.jsp";
 		}
 		
 		@RequestMapping(path="/flightSelect.lti",method = RequestMethod.POST)
-		public String flightSelect(@RequestParam("flightclass") double price,HttpSession session) {
-			session.setAttribute("classPrice", price);
+		public String flightSelect(@RequestParam("flightclass") double price,ModelMap model,@RequestParam("flightId")int id) {
+			model.put("classPrice", price);
+			model.put("flightId", id);
 			return "passenger.jsp";
 		}
 }		

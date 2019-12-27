@@ -26,7 +26,7 @@ text-align: center;
 .but{
 	height: 35px;
 	border-radius: 5px;
-	}
+}
 
 .but>input{
 height: 35px;
@@ -38,8 +38,8 @@ background:powderblue;
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
-<input type ="text" name="TotalPassengers" value="${ sessionScope.passengers }">
+<body bgcolor="#e6e2d3">
+<form action="" method="post">
 <div class="main">
 <table  style="color: olive; " class="tab">
 <tr>
@@ -54,10 +54,12 @@ background:powderblue;
 <td>${book.passengerAge }</td>
 </tr><br>
 </c:forEach>
-</table><br>
+</table><br><br>
+<LABEL style="color: olive;" >TOTAL FARE: ${ tot }</LABEL><br><br>
 <div class="but">
-	<form action="updateFlight.lti" method="post"><input type="submit" value="Confirm Booking" /></form>
-	</div> 
+	<input type="submit" value="Confirm Booking" />
+</div> 
 </div>	
+</form>
 </body>
 </html>

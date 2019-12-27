@@ -46,9 +46,13 @@ border: 1px solid grey;
 background:powderblue;
 }
 </style>
-
+<script>
+function proceed(flightId) {
+	document.getElementById("id").value=flightId;
+}
+</script>
 </head>
-<body>
+<body bgcolor="#e6e2d3">
 	<form action="flightSelect.lti"  method="post">
 <div class="top">
 	<nav>
@@ -74,13 +78,16 @@ background:powderblue;
 						<td>${ flight.duration } </td>
 						<td><INPUT TYPE="radio" name="flightclass" value="${ flight.flightsDetails.economyPrice }"><br>${ flight.flightsDetails.economyPrice }</td>
 						<td><INPUT TYPE="radio" name="flightclass" value="${ flight.flightsDetails.businessPrice }"><br>${ flight.flightsDetails.businessPrice }</td>					
+					<td>
+					<div class="but">
+						<input type="submit" value="Book" onclick="proceed(${ flight.flightsDetails.flightId })"/>
+
+					</div>
+					</td>
 					</tr>
 				</c:forEach>
 		</table>
-			<div class="but">
-<input type="submit" value="Book"/>
-
-	</div>
+		<input id="id" type="hidden" name="flightId">
 	</div>
 </form>
 </body>
