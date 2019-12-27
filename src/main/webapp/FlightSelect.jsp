@@ -22,7 +22,7 @@ text-align: center;
     padding:25px 25px 10px ;
 }
 .top{
-font-size: 25px;
+
 color:white; 
 text-align:justify;
 }
@@ -56,8 +56,9 @@ function proceed(flightId) {
 	<form action="flightSelect.lti"  method="post">
 <div class="top">
 	<nav>
-		<span>${ source } -> ${ destination }</span>
-		<span style="float: right; ">${ passengers } Passengers</span>
+			<label>Hello, ${sessionScope.loggedInPassenger}</label><br><br>
+		<span style="font-size: 25px;">${ source } -> ${ destination }</span>
+		<span style="float: right;font-size: 25px; ">${ passengers } Passengers</span>
 	</nav>
 	</div>
 	<div class="main">

@@ -30,7 +30,7 @@ import com.lti.service.PassengerService;
 import com.lti.service.RegisterationService;
 
 @Controller
-@SessionAttributes({"passengers","classPrice"})
+@SessionAttributes({"passengers","classPrice","source","destination","flightId","tot","loggedInPassenger"})
 public class FlightController {
 
 		@Autowired
@@ -75,11 +75,12 @@ public class FlightController {
 		private LoginService loginService;
 		
 		@RequestMapping(path="/login.lti",method=RequestMethod.POST)
-		public String loginFlight(@RequestParam("email") String email,@RequestParam("password") String password) {//,ModelMap model) {
+		public String loginFlight(@RequestParam("email") String email,@RequestParam("password") String password,ModelMap model) {
 		
 			try {
 				Registeration login = loginService.login(email, password);
-				//model.put("loggedInPassenger",login);
+				String name=login.getFirstname();
+				model.put("loggedInPassenger",name);
 				return "FlightSearch.jsp";
 			}
 			catch(Exception e) {
@@ -120,5 +121,9 @@ public class FlightController {
 			Double total= pass*price;
 			model.put("tot", total);
 			return "passenger.jsp";
+		}
+		
+		public String bookingDetails() {
+			return "";
 		}
 }		

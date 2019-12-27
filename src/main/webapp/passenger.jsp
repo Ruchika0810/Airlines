@@ -37,16 +37,36 @@ height: 100%;
 text-align: center;
 }
 
+.top{
+color:white; 
+text-align:justify;
+}
+
+.top nav{
+display: block;
+background-color:teal;
+padding: 15px;
+}
 </style>
 <body bgcolor="#e6e2d3">
 <div class="main">
-<h2 style="color:maroon;">Welcome</h2><!-- ${sessionScope.loggedInPassenger.email } -->
-<h3 style="color:maroon;">Enter Passengers Detail</h3>
-<div>
-<label style="color:maroon;"><strong>Flight No: ${ flightId }    Total Fare: ${ tot }</strong> </label>
-</div> 
+<div class="top">
+<nav>
+<table class="top" style="width: 100%;   ">
+<tr>
+<td>Hello, ${sessionScope.loggedInPassenger}</td>
+<td></td>
+<td style="text-align: right;">Flight No: ${ flightId }</td>
+</tr>
+<tr>
+<td></td>
+<td><h3 style="text-align: center; font-size: 20px" >${ sessionScope.source } - ${ sessionScope.destination }</h3></td>
+<td style="text-align: right;">Total Fare: ${ tot }</td>
+</tr>
+</table></nav>
+<div style="padding-top: 20px;color:#00264d;font-size: 20px"><strong>Enter Passengers Detail</strong> </div>
 <form method="post" action="addPassenger.lti"> 
-<table style="color:teal; " class="tab">
+<table style="color:maroon; " class="tab">
 <tr>
 <th>Sr. No.</th>
 <th>Passenger Name</th>
