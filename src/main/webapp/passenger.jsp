@@ -43,7 +43,7 @@ text-align: center;
 <h2 style="color:maroon;">Welcome</h2><!-- ${sessionScope.loggedInPassenger.email } -->
 <h3 style="color:maroon;">Enter Passengers Detail</h3>
 <div>
-<label style="color:maroon;"><strong>Flight No: ${ flightId }</strong> </label>
+<label style="color:maroon;"><strong>Flight No: ${ flightId }    Total Fare: ${ tot }</strong> </label>
 </div> 
 <form method="post" action="addPassenger.lti"> 
 <table style="color:teal; " class="tab">

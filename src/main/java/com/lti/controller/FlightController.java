@@ -109,10 +109,6 @@ public class FlightController {
 			List<Passenger> passengers = passengerDetailsDto.getPassengers();
 			  model.put("booking", passengers);
 			passengerService.passengerDetails(passengers);
-			Integer pass=(Integer)model.get("passengers");
-			Double price=(Double)model.get("classPrice");
-			Double total= pass*price;
-			model.put("tot", total);
 			return "Booking.jsp";
 		}
 		
@@ -120,6 +116,9 @@ public class FlightController {
 		public String flightSelect(@RequestParam("flightclass") double price,ModelMap model,@RequestParam("flightId")int id) {
 			model.put("classPrice", price);
 			model.put("flightId", id);
+			Integer pass=(Integer)model.get("passengers");
+			Double total= pass*price;
+			model.put("tot", total);
 			return "passenger.jsp";
 		}
 }		
