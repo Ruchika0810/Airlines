@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +26,11 @@ public class Passenger {
 	private String passengerGender;
 	@Column(name = "AGE")
 	private int passengerAge;
+	
+	@ManyToOne
+	@JoinColumn(name="Booking_ID")
+	BookingDetails bookingDetails;
+	
 	public int getPassengerId() {
 		return passengerId;
 	}
@@ -59,6 +66,12 @@ public class Passenger {
 	}
 	public void setPassengerAge(int passengerAge) {
 		this.passengerAge = passengerAge;
+	}
+	public BookingDetails getBookingDetails() {
+		return bookingDetails;
+	}
+	public void setBookingDetails(BookingDetails bookingDetails) {
+		this.bookingDetails = bookingDetails;
 	}
 
 }

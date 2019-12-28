@@ -1,28 +1,46 @@
+
 package com.lti.model;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "BOOKING_DETAILS")
 public class BookingDetails {
 	 @Id
+	 @GeneratedValue
+	 @Column(name="BOOKING_ID")
 	 private int bookingId;
+	  
+	 @Column(name="DATE_OF_JOURNEY")
 	 private LocalDate dateOfJourney;
-	 private String bookedBy;
-	 private String bookedClass;
+	 
+	 @Column(name="BOOKING_STATUS")
 	 private String bookingStatus;
 	
-	 @OneToOne
+	 @Column(name="FLIGHT_ID")
+	 private int flightId;
+	 
+	 @ManyToOne
 	 @JoinColumn(name="REGISTERATION_ID")
 	 Registeration registeration;
 	 
-	 @OneToMany
-	 @JoinColumn(name="PASSENGER_ID")
+	 @OneToMany(mappedBy = "bookingDetails",cascade = CascadeType.ALL)
 	 List<Passenger> passenger;
+	 
+	 @OneToOne(mappedBy = "bookingdetails")
+	 Payment payment;
 
 	public int getBookingId() {
 		return bookingId;
@@ -40,21 +58,7 @@ public class BookingDetails {
 		this.dateOfJourney = dateOfJourney;
 	}
 
-	public String getBookedBy() {
-		return bookedBy;
-	}
 
-	public void setBookedBy(String bookedBy) {
-		this.bookedBy = bookedBy;
-	}
-
-	public String getBookedClass() {
-		return bookedClass;
-	}
-
-	public void setBookedClass(String bookedClass) {
-		this.bookedClass = bookedClass;
-	}
 
 	public String getBookingStatus() {
 		return bookingStatus;
@@ -79,6 +83,31 @@ public class BookingDetails {
 	public void setPassenger(List<Passenger> passenger) {
 		this.passenger = passenger;
 	}
-	 
+
+	public int getFlightId() {
+		return flightId;
+	}
+
+	public void setFlightId(int flightId) {
+		this.flightId = flightId;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	@Override
+	public String toString() {
+		return "BookingDetails [bookingId=" + bookingId + ", dateOfJourney=" + dateOfJourney + ", bookingStatus="
+				+ bookingStatus + ", flightId=" + flightId + ", registeration=" + registeration + ", passenger="
+				+ passenger + ", payment=" + payment + "]";
+	}
+
+	
+	
 	 
 }

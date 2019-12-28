@@ -5,17 +5,6 @@
 <head>
 <style>
 
-.box{
-	margin-left: 50px;
-	margin-top: 30px;
-	width: 30%;
-	height: auto;
-	padding: 10px; 
-	padding-top: 1px;
-	border: 1px solid grey;
-	border-radius: 5px;
-	background-color: white;
-}
 input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -101,7 +90,7 @@ input[type="radio"]:checked {
 }
 
 .search>input{
-	width:50%;
+	width:40%;
 	height: 35px;
 	border-radius: 5px;
 	border: 1px solid grey;
@@ -110,6 +99,7 @@ input[type="radio"]:checked {
 	margin-top: 10px;
 	margin-left: 90p30
 	}
+	
 	
 .top{
 font-size: 30px;
@@ -127,14 +117,41 @@ padding: 15px;
 	border-radius: 5px;
 	background:powderblue;
 }
+
+.box{
+	margin-top: 30px;
+	width: 48%;
+	height: auto;
+	padding: 10px; 
+	padding-top: 1px;
+	border: 1px solid grey;
+	border-radius: 5px;
+	background-color: white;
+	float: left;
+}
+.right{
+	margin-top: 30px;
+	width: 30%;
+	height: auto;
+	padding: 10px; 
+	padding-top: 1px;
+	border: 1px solid grey;
+	border-radius: 5px; 
+	float: right;
+}
+
+.main{
+width: 100%;
+height:100%;
+}
 </style>
 </head>
 <body bgcolor="#e6e2d3">
 <form action="flight.lti" method="post">
+<div class="main">
 <div class="top">
 <nav>
 	<span>AIRLINE RESERVATION</span>
-	<span style="float: right; " class = "log"><input type="submit" name="submit" value="Login/Signup"></span>
 </nav>
 </div>
 <div class="box">
@@ -164,6 +181,11 @@ padding: 15px;
 <br><br>
 <div class="search">	
 <input type="submit" name="search" value="Search Flight">
+</div>
+</div>
+<div class="right">
+<a href="bookingHistory.lti">View Booking History</a><br><br>
+<a href="cancelling.jsp">Cancel Ticket</a><br><br>
 </div>
 </div>
 </form>

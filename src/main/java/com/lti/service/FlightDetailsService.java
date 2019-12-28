@@ -17,8 +17,8 @@ public class FlightDetailsService {
 	@Autowired
 	FlightDetailsRepository flightDetailsRepository;
 
-	public List<FlightSchedule> fetchFlight(String source, String destination, LocalDate date, int passengers) {
-		List<FlightSchedule> flights = flightDetailsRepository.fetchFlight(source, destination, date);
+	public List<FlightSchedule> fetchFlight(String source, String destination, LocalDate travelDate, int passengers) {
+		List<FlightSchedule> flights = flightDetailsRepository.fetchFlight(source, destination, travelDate);
 		List<FlightSchedule> flightsavailable = new ArrayList<FlightSchedule>();
 		for (int i = 0; i < flights.size(); i++) {
 			int pass=flights.get(i).getFlightsDetails().getSeatAvailablity() ;
@@ -27,5 +27,13 @@ public class FlightDetailsService {
 			}
 		}      
 		return flightsavailable;
+	}
+	
+	public FlightsDetails findFlightDetails(int id) {
+		return flightDetailsRepository.findFlightDetails(id);		
+	}
+	
+	public void saveFlightDetals(FlightsDetails flightsDetails) {
+		flightDetailsRepository.saveFlightDetals(flightsDetails);
 	}
 }

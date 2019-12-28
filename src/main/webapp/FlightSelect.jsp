@@ -47,8 +47,10 @@ background:powderblue;
 }
 </style>
 <script>
-function proceed(flightId) {
+function proceed(flightId,departureTime,arrivalTime) {
 	document.getElementById("id").value=flightId;
+	document.getElementById("id2").value=departureTime;
+	document.getElementById("id3").value=arrivalTime;
 }
 </script>
 </head>
@@ -56,11 +58,11 @@ function proceed(flightId) {
 	<form action="flightSelect.lti"  method="post">
 <div class="top">
 	<nav>
-			<label>Hello, ${sessionScope.loggedInPassenger}</label><br><br>
+		<label>Hello, ${sessionScope.loggedInPassenger}</label><br><br>
 		<span style="font-size: 25px;">${ source } -> ${ destination }</span>
 		<span style="float: right;font-size: 25px; ">${ passengers } Passengers</span>
 	</nav>
-	</div>
+</div>
 	<div class="main">
 	
 		<table  style="color: olive; " class="tab">
@@ -81,7 +83,7 @@ function proceed(flightId) {
 						<td><INPUT TYPE="radio" name="flightclass" value="${ flight.flightsDetails.businessPrice }"><br>${ flight.flightsDetails.businessPrice }</td>					
 					<td>
 					<div class="but">
-						<input type="submit" value="Book" onclick="proceed(${ flight.flightsDetails.flightId })"/>
+						<input type="submit" value="Book" onclick="proceed(${ flight.flightsDetails.flightId },'${ flight.departureTime }','${ flight.arrivalTime }')"/>
 
 					</div>
 					</td>
@@ -89,6 +91,8 @@ function proceed(flightId) {
 				</c:forEach>
 		</table>
 		<input id="id" type="hidden" name="flightId">
+		<input id="id2" type="hidden" name="deptTime">
+		<input id="id3" type="hidden" name="arrTime">
 	</div>
 </form>
 </body>

@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<label>Login Successfull!!</label>
+<form action="cancleBooking.lti" method="post">
+<label>Enter your booking Id</label>
+<input type="number" name="bid">
+<input type="submit" value="Submit">
+</form>
 </body>
 </html>

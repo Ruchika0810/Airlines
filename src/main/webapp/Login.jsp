@@ -43,6 +43,8 @@
                     &nbsp; &nbsp; &nbsp; &nbsp;
                     <button type="reset" class="btn btn-primary">Clear</button>
                     &nbsp; &nbsp; &nbsp; &nbsp;
+                    <button type="submit" class="btn btn-danger"><a style="color:white;" href="registeration.jsp" >Sign-Up </a></button>
+                    &nbsp; &nbsp; &nbsp; &nbsp;
             </div>
         </div> <br> <hr> <br>
 

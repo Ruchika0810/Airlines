@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public class FlightDetailsRepository {
 		EntityManager entityManager;
 		
 		//public void fetchFlight(String source, String destination, LocalDate date) {
-		public List<FlightSchedule> fetchFlight(String source, String destination, LocalDate date) {
+		public List<FlightSchedule> fetchFlight(String source, String destination, LocalDate travelDate) {
 		/*	System.out.println("testing...........");
 			Query q= entityManager.createQuery("select f from FlightsDetails f join fetch f.flightSchedules fs where f.source=:so and f.destination=:des");
 			q.setParameter("so", source);
@@ -51,10 +52,20 @@ public class FlightDetailsRepository {
 			
 			
 			Query q2 = entityManager.createQuery("select sc from FlightSchedule sc where sc.scheduleDate =: dt and sc.flightsDetails.flightId IN (:fids )");
-			q2.setParameter("dt", date);
+			q2.setParameter("dt", travelDate);
 			q2.setParameter("fids", listfids);
 			List<FlightSchedule> flist = q2.getResultList();
 			
 			return flist;
+		}
+		
+		public FlightsDetails findFlightDetails(int id) {
+			FlightsDetails flightsDetails= entityManager.find(FlightsDetails.class, id);
+			return flightsDetails;
+		}
+		
+		@Transactional
+		public void saveFlightDetals(FlightsDetails flightsDetails) {
+			entityManager.merge(flightsDetails);
 		}
 }

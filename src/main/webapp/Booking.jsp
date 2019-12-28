@@ -50,7 +50,7 @@ padding: 15px;
 <title>Insert title here</title>
 </head>
 <body bgcolor="#e6e2d3">
-<form action="" method="post">
+<form action="booking.lti" method="post">
 <div class="main">
 <div class="top">
 <nav>
